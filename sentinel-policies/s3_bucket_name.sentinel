@@ -1,0 +1,23 @@
+# Simple Sentinel Policy: Ensure S3 bucket names follow a naming convention
+import "tfplan/v2" as tfplan
+
+# Policy: S3 bucket names must start with 'ishwar-'
+main = func() {
+    all_buckets = filter tfplan.resource_changes as rc {
+        rc.type is "aws_s3_bucket" and rc.change.actions contains "create"
+    }
+    
+    valid = true
+    for bucket in all_buckets {
+        name = bucket.change.after.bucket
+        if not rule_name(name) {
+            print("Bucket name does not follow naming convention: " + name)
+            valid = false
+        }
+    }
+    return valid
+}
+
+rule_name = func(name) {
+    return startswith(name, "ishwar-")
+}
