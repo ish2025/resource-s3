@@ -8,3 +8,8 @@ variable "aws_access_key_id" {
   description = "AWS access key ID"
   type        = string
 }
+
+variable "aws_session_token" {
+    description = "AWS session token"
+    type        = string
+}
