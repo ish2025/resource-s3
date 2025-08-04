@@ -3,5 +3,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "my_bucket" {
-    bucket = "ishwar-s3-bucket-name-123456"
+    bucket = "ishwar-s3-bucket-name-123458"
 }
